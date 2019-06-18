@@ -15,11 +15,17 @@ export const removeIngredient = (name) => {
   }
 }
 
-const setIngredients = (ingredients) => {
+export const setIngredients = (ingredients) => {
   return {
     type: actionTypes.SET_INGREDIENTS,
     ingredients,
   };
+}
+
+export const fetchIngredientsFailed = () => {
+  return {
+    type: actionTypes.FETCH_INGREDIENTS_FAILED,
+  }
 }
 
 // return a fx that receives the dispatch function that I can use later in the body - available due to redux-thunk, allowing for use of asyc code and then able to dispatch another action
@@ -30,7 +36,7 @@ export const initIngredients = () => {
         dispatch(setIngredients(response.data));
       })
       .catch((error) => {
-        
+        dispatch(fetchIngredientsFailed());
       })
   }
 };
